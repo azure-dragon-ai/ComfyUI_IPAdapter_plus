@@ -1314,7 +1314,7 @@ class IPAdapterLoadEmbeds:
     def INPUT_TYPES(s):
         #input_dir = folder_paths.get_input_directory()
         embeds_dir = "/data/models/IP-Adapter"
-        files = [os.path.relpath(os.path.join(root, file), embeds_dir) for root, dirs, files in os.walk(input_dir) for file in files if file.endswith('.ipadpt')]
+        files = [os.path.relpath(os.path.join(root, file), embeds_dir) for root, dirs, files in os.walk(embeds_dir) for file in files if file.endswith('.ipadpt')]
         return {"required": {"embeds": [sorted(files), ]}, }
 
     RETURN_TYPES = ("EMBEDS", )
