@@ -1312,8 +1312,9 @@ class IPAdapterSaveEmbeds:
 class IPAdapterLoadEmbeds:
     @classmethod
     def INPUT_TYPES(s):
-        input_dir = folder_paths.get_input_directory()
-        files = [os.path.relpath(os.path.join(root, file), input_dir) for root, dirs, files in os.walk(input_dir) for file in files if file.endswith('.ipadpt')]
+        #input_dir = folder_paths.get_input_directory()
+        embeds_dir = "/data/models/IP-Adapter"
+        files = [os.path.relpath(os.path.join(root, file), embeds_dir) for root, dirs, files in os.walk(input_dir) for file in files if file.endswith('.ipadpt')]
         return {"required": {"embeds": [sorted(files), ]}, }
 
     RETURN_TYPES = ("EMBEDS", )
@@ -1321,7 +1322,9 @@ class IPAdapterLoadEmbeds:
     CATEGORY = "ipadapter/embeds"
 
     def load(self, embeds):
-        path = folder_paths.get_annotated_filepath(embeds)
+        #path = folder_paths.get_annotated_filepath(embeds)
+        embeds_dir = "/data/models/IP-Adapter"
+        path = os.path.join(embeds_dir, embeds)
         return (torch.load(path).cpu(), )
 
 class IPAdapterWeights:
